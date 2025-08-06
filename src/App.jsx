@@ -6,12 +6,7 @@ import { useMovies } from './useMovies';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const {
-    movieList,
-    isLoading,
-    errorMessage,
-    trendingMovies
-  } = useMovies(searchTerm);
+  const { movieList, isLoading, errorMessage, trendingMovies, isTrendLoading, errorTrendMessage } = useMovies(searchTerm);
 
   return (
     <main>
@@ -26,14 +21,21 @@ const App = () => {
         {trendingMovies.length > 0 && (
           <section className='trending'>
             <h2 className='text-gradient2'>Trending Movies</h2>
-            <ul>
-              {trendingMovies.map((movie, index) => (
-                <li key={movie.id}>
-                  <p>{index + 1}</p>
-                  <img src={movie.poster_url || '/no-movie.png'} alt={movie.title} />
-                </li>
-              ))}
-            </ul>
+
+            {isTrendLoading ? (
+              <Spinner />
+            ) : errorTrendMessage ? (
+              <p className='text-red-500 m-6'>{errorTrendMessage}</p>
+            ) : (
+              <ul>
+                {trendingMovies.map((movie, index) => (
+                  <li key={movie.id}>
+                    <p>{index + 1}</p>
+                    <img src={movie.poster_url || '/no-movie.png'} alt={movie.title} />
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
         )}
 
@@ -42,7 +44,7 @@ const App = () => {
           {isLoading ? (
             <Spinner />
           ) : errorMessage ? (
-            <p className='text-red-500'>{errorMessage}</p>
+            <p className='text-red-500 m-6'>{errorMessage}</p>
           ) : (
             <ul>
               {movieList.map((movie) => (

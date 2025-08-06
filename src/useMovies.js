@@ -58,12 +58,13 @@ export const useMovies = (searchTerm) => {
   useEffect(() => {
     const loadTrendingMovies = async () => {
       setIsTrendLoading(true);
+      setErrorTrendMessage('')
       try {
         const movies = await getTrendingMovies();
         setTrendingMovies(movies);
       } catch (error) {
         console.log(`Error fetching trending movies: ${error}`);
-        setErrorTrendMessage('Could not load trending movies.');
+        setErrorTrendMessage('Error fetching trending movies, Please try again later.');
       } finally {
         setIsTrendLoading(false);
       }
@@ -72,12 +73,5 @@ export const useMovies = (searchTerm) => {
     loadTrendingMovies();
   }, []);
 
-  return {
-    movieList,
-    isLoading,
-    errorMessage,
-    trendingMovies,
-    isTrendLoading,
-    errorTrendMessage
-  };
+  return { movieList, isLoading, errorMessage, trendingMovies, isTrendLoading, errorTrendMessage };
 };
