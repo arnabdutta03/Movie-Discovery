@@ -11,7 +11,7 @@ function MovieCard({ movie: { id, title, poster_path, vote_average, release_date
                     <h3 key={id} className='text-white mt-6 mb-1'>{title}</h3>
                     <div className='content'>
                         <div className='rating'>
-                            <img src='/public/star.png'></img>
+                            <img src='/star.png'></img>
                             <p className='text-amber-300 '>{vote_average ? vote_average.toFixed(1) : 'N/A'}</p>
                         </div>
                         <span>•</span>

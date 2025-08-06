@@ -3,6 +3,7 @@ import Search from './components/Search.jsx'
 import Spinner from './components/Spinner.jsx'
 import MovieCard from './components/MovieCard.jsx';
 import { useDebounce } from 'react-use';
+import { updateSearchCount } from './appwrite.js';
 
 const API_URL = import.meta.env.VITE_TMDB_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -31,14 +32,11 @@ const App = () => {
     setErrorMessage('');
 
     try {
-      const endpoint = query ? `${API_URL}/search/movie?query=${encodeURIComponent(query)}`
-      : `${API_URL}/discover/movie?sort_by=popularity.desc`;
+      const endpoint = query ? `${API_URL}/search/movie?query=${encodeURIComponent(query)}` : `${API_URL}/discover/movie?sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies');
-      }
+      if (!response.ok) { throw new Error('Failed to fetch movies') }
 
       const data = await response.json();
 
@@ -49,7 +47,8 @@ const App = () => {
       }
 
       setMovieList(data.results || []);
-      console.log(data.results)
+
+      if (query && data.results.length > 0) { await updateSearchCount(query, data.results[0]) }
 
     } catch (error) {
       console.log(`Error fetching movies: ${error}`);
@@ -59,11 +58,8 @@ const App = () => {
     }
   }
 
-  useDebounce(() => setdeBounce(searchTerm), 500, [searchTerm]);
-
-  useEffect(() => {
-    fetchMovies(deBounce);
-  }, [deBounce]);
+  useDebounce(() => setdeBounce(searchTerm), 1000, [searchTerm]);
+  useEffect(() => { fetchMovies(deBounce) }, [deBounce]);
 
   return (
     <main>
@@ -84,7 +80,7 @@ const App = () => {
             <p className='text-red-500'>{errorMessage}</p>
           ) : (
             <ul>
-              {movieList.map((movie)=>(
+              {movieList.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} ></MovieCard>
               ))}
             </ul>
