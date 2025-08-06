@@ -1,12 +1,95 @@
-# React + Vite
+# 🎬 Movie Discovery App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and responsive **React + Vite** application that allows users to explore, search, and stream trending movies. This app integrates with **TMDB API** and is styled using **Tailwind CSS** for a clean and modern UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔍 Search and explore trending or popular movies  
+- 🎞️ Stream trailers or full content directly  
+- 📈 See what's trending now  
+- 💌 Clean responsive UI with Tailwind CSS  
+- ⚡ Lightning-fast performance with Vite  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, Vite  
+- **Styling**: Tailwind CSS  
+- **API**: [TMDB API](https://www.themoviedb.org/)  
+- **State Management**: React Hooks (`useState`, `useEffect`)  
+- **Build Tools**: ESLint, PostCSS  
+
+---
+
+## 📦 Getting Started
+
+### 1. Clone the repository
+
+git clone https://github.com/your-username/movie-app.git  
+cd movie-app
+
+### 2. Install dependencies
+
+npm install
+
+### 3. Add environment variables
+
+Create a `.env` file in the root with your TMDB API credentials:
+
+VITE_TMDB_URL=https://api.themoviedb.org/3  
+VITE_TMDB_API_KEY=your_api_key_here
+
+### 4. Start the development server
+
+npm run dev
+
+Open `http://localhost:5173` to view the app.
+
+---
+
+## 🧩 Folder Structure
+
+src/  
+├── assets/            # Static images  
+├── components/        # Reusable components like Search, MovieCard  
+├── pages/             # Page components  
+├── App.jsx            # Root component  
+├── main.jsx           # Entry point  
+└── index.css          # Tailwind CSS + custom styles
+
+---
+
+## 🧪 Linting & Formatting
+
+This project uses **ESLint** with basic rules.  
+You can expand it further for production apps.
+
+> For TypeScript support, check out the [React + Vite + TS Template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
+
+---
+
+## 📸 Preview
+
+![App Preview](./screenshot.png)
+
+---
+
+## 📄 License
+
+MIT License.  
+Feel free to fork and customize it for your own movie projects!
+
+---
+
+## 🙌 Acknowledgments
+
+- [TMDB API](https://www.themoviedb.org/)  
+- [Tailwind CSS](https://tailwindcss.com/)  
+- [Vite](https://vitejs.dev/)  
+
+---
+
+> Built with ❤️ using React, Tailwind & Vite
